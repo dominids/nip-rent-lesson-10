@@ -31,3 +31,14 @@ jobs:
 
     - name: Run linter (main_demo.py)
       run: uv run ruff check main_demo.py --exit-zero
+    
+    - name: Generate Docs
+    run: uv run pdoc src/ -o ./docs-output 
+
+    - name: Upload Artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: './docs-output'
+
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v4
